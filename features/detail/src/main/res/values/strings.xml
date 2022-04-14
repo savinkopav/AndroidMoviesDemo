@@ -6,4 +6,6 @@
     <string name="runtime">Runtime: %s</string>
     <string name="loading_error">Loading error</string>
     <string name="favorite">Favorite</string>
+    <string name="detail_view_message_item_saved" translatable="false">item saved</string>
+    <string name="detail_view_message_item_not_saved" translatable="false">item not saved</string>
 </resources>

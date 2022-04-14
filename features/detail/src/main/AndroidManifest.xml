@@ -3,7 +3,8 @@
     package="com.vp.detail">
 
     <application>
-        <activity android:name=".DetailActivity">
+        <activity android:name=".DetailActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

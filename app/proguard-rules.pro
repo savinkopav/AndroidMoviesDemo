@@ -28,6 +28,8 @@
     @retrofit2.http.* <methods>;
 }
 
+-keep, allowoptimization class com.vp.list.** { *; }
+
 # Ignore annotation used for build tooling.
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 

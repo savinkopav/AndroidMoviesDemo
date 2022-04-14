@@ -48,9 +48,9 @@ dependencies {
 
     //support library
     implementation "androidx.appcompat:appcompat:$rootProject.supportLibraryVersion"
-    implementation "androidx.recyclerview:recyclerview:$rootProject.supportLibraryVersion"
+    implementation "com.google.android.material:material:1.5.0"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayout"
-    implementation "com.google.android.material:material:$rootProject.supportLibraryVersion"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     //api
     api "com.squareup.retrofit2:retrofit:$rootProject.retrofit"

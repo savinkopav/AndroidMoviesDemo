@@ -4,7 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <application android:usesCleartextTraffic="true">
-        <activity android:name="com.vp.list.MovieListActivity">
+        <activity android:name="com.vp.list.MovieListActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

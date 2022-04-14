@@ -54,4 +54,16 @@ public class ListViewModelTest {
         verify(mockObserver).onChanged(SearchResult.inProgress());
     }
 
+    @Test
+    public void shouldReturnLoadedState() {
+        //given
+        SearchService searchService = mock(SearchService.class);
+        when(searchService.search(anyString(), anyInt())).thenReturn(Calls.response(mock(SearchResponse.class)));
+        ListViewModel listViewModel = new ListViewModel(searchService);
+
+        //when
+        listViewModel.searchMoviesByTitle("title", 1);
+
+        assertThat(listViewModel.observeMovies().getValue().getListState()).isEqualTo(ListState.LOADED);
+    }
 }
