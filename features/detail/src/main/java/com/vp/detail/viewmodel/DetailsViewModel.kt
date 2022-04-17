@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vp.detail.DetailActivity
+import com.vp.detail.QueryProvider
 import com.vp.detail.data.local.db.model.Movie
 import com.vp.detail.domain.MovieRepository
 import com.vp.detail.model.MovieDetail
@@ -33,9 +33,13 @@ class DetailsViewModel @Inject constructor(
 
     fun insertingState(): LiveData<InsertingDatabaseState> = insertingDatabaseState
 
-    fun fetchDetails() {
+    fun clearInsertingState() {
+        insertingDatabaseState.value = null
+    }
+
+    fun fetchDetails(queryProvider: QueryProvider) {
         loadingState.value = LoadingState.IN_PROGRESS
-        detailService.getMovie(DetailActivity.queryProvider.getMovieId()).enqueue(object : Callback, retrofit2.Callback<MovieDetail> {
+        detailService.getMovie(queryProvider.getMovieId()).enqueue(object : Callback, retrofit2.Callback<MovieDetail> {
             override fun onResponse(call: Call<MovieDetail>?, response: Response<MovieDetail>?) {
                 details.postValue(response?.body())
 

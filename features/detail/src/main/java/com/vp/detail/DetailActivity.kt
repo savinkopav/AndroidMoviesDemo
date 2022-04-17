@@ -18,6 +18,8 @@ class DetailActivity : DaggerAppCompatActivity(), QueryProvider {
     @Inject
     lateinit var factory: ViewModelProvider.Factory
 
+    var queryProvider: QueryProvider? = null
+
     private lateinit var detailViewModel: DetailsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +29,7 @@ class DetailActivity : DaggerAppCompatActivity(), QueryProvider {
         binding.viewModel = detailViewModel
         queryProvider = this
         binding.lifecycleOwner = this
-        detailViewModel.fetchDetails()
+        detailViewModel.fetchDetails(queryProvider!!)
         detailViewModel.title().observe(this, Observer {
             supportActionBar?.title = it
         })
@@ -60,7 +62,7 @@ class DetailActivity : DaggerAppCompatActivity(), QueryProvider {
             R.id.star -> {
 
                 detailViewModel.details().value?.let { movieDetail ->
-                    detailViewModel.saveMovie(movieDetail, queryProvider.getMovieId())
+                    detailViewModel.saveMovie(movieDetail, queryProvider!!.getMovieId())
                 }
 
                 true
@@ -81,7 +83,13 @@ class DetailActivity : DaggerAppCompatActivity(), QueryProvider {
         }
     }
 
-    companion object {
-        lateinit var queryProvider: QueryProvider
+    override fun onDestroy() {
+        super.onDestroy()
+        if (detailViewModel.insertingState().value != null) {
+            detailViewModel.clearInsertingState()
+        }
+        if (queryProvider != null) {
+            queryProvider = null
+        }
     }
 }
